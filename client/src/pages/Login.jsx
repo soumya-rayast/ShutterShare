@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useDebugValue, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import toast from 'react-hot-toast';
-import axios from 'axios';
-import { login } from "../../src/store/slices/authSlice";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { login } from "../../store/slices/authSlice";
 import { useDispatch } from "react-redux";
 
 const Login = () => {
-  const dispatch = useDispatch();
+  const dipatch = useDispatch();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -14,68 +14,86 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (!email || !password) {
-      return toast.error('Email and password are required!');
-    }
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/login`, { email, password });
-      const data = res.data;
+      const res = await axios.post(import.meta.env.VITE_API_URL + "/login", {
+        email,
+        password,
+      });
+      const data = await res.data;
       toast.success(data.message);
-
-      dispatch(login(data));
+      // dipatch karna hai login -> jo bhi data aa raha hai sab push karna hai state me
+      dipatch(login(data));
       navigate(`/${data.role}/profile`);
-      
     } catch (error) {
-      toast.error(error.response?.data?.message || "An error occurred");
+      toast.error(error.response.data.message);
     }
   };
 
   return (
-    <div className="mt-20 sm:mt-10 min-h-screen flex items-center justify-center w-full">
-      <div className="bg-white shadow-md rounded-3xl px-5 py-6 w-full sm:w-[27vw]">
-        <h1 className="text-2xl font-bold text-center mb-4">Let's Connect</h1>
+    <div className="mt-20 sm:mt-10 min-h-screen flex items-center justify-center w-full ">
+      <div className="bg-white shadow-md rounded-3xl px-5 py-6 w-full sm:w-[35vw]">
+        <h1 className="text-2xl font-bold text-center mb-4">Let's Connect!</h1>
         <form onSubmit={handleLogin}>
+          {/* For email */}
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Email Address
             </label>
             <input
-              type="email"
+              type="text"
               name="email"
               id="email"
-              placeholder="xyz@gmail.com"
-              required
+              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="shadow-md rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-black focus:border-black"
             />
           </div>
+
+          {/* For password */}
           <div className="mb-4">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="*******"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Password
             </label>
             <input
               type="password"
               name="password"
               id="password"
-              required
-              placeholder="********"
+              placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="shadow-md rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-black focus:border-black"
             />
           </div>
-          <a href="#" className="flex items-center justify-end hover:text-black">Forgot Password?</a>
+
+          {/* For forgot password */}
+          <a href="#" className="text-xs flex items-center text-black justify-end">
+            Forgot Password?
+          </a>
+
+          {/* Signup with account */}
           <div className="flex items-center justify-end mb-4">
-            <Link to='/signup' className="text-xs text-black">Don't have an Account? <span className="underline">Sign Up here</span></Link>
+            <Link className="text-xs text-black " to="/signup">
+              Don't have account? <span className="underline">Signup here</span>
+            </Link>
           </div>
-          <button type='submit' className="w-full py-2 rounded-md shadow-md text-sm font-medium text-white bg-black">
+
+          <button
+            type="submit"
+            className="w-full py-2 px-4 rounded-md shadow-md text-sm font-medium text-white bg-black "
+          >
             Login
           </button>
         </form>
       </div>
     </div>
   );
-}
+};
 
 export default Login;
