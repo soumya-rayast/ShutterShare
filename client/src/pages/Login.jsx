@@ -1,12 +1,13 @@
-import { useDebugValue, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { login } from "../../store/slices/authSlice";
 import { useDispatch } from "react-redux";
+import heroSection from '../assets/mheroSections.jpg';
 
 const Login = () => {
-  const dipatch = useDispatch();
+  const dispatch = useDispatch(); // Fixed typo here
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -19,19 +20,24 @@ const Login = () => {
         email,
         password,
       });
-      const data = await res.data;
+      const data = res.data;
       toast.success(data.message);
-      // dipatch karna hai login -> jo bhi data aa raha hai sab push karna hai state me
-      dipatch(login(data));
+      // Dispatch the login action with the received data
+      dispatch(login(data)); // Fixed typo here
       navigate(`/${data.role}/profile`);
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Login failed!");
     }
   };
 
   return (
-    <div className="mt-20 sm:mt-10 min-h-screen flex items-center justify-center w-full ">
-      <div className="bg-white shadow-md rounded-3xl px-5 py-6 w-full sm:w-[35vw]">
+    <div className="mt-20 sm:mt-3 min-h-screen flex items-center justify-center w-full relative">
+      <img
+        src={heroSection}
+        alt="Hero Section"
+        className="opacity-80 w-full h-full object-cover absolute top-0 left-0"
+      />
+      <div className="bg-white shadow-md rounded-3xl px-5 py-6 mx-2 w-full sm:w-[35vw] relative z-10">
         <h1 className="text-2xl font-bold text-center mb-4">Let's Connect!</h1>
         <form onSubmit={handleLogin}>
           {/* For email */}
@@ -43,7 +49,7 @@ const Login = () => {
               Email Address
             </label>
             <input
-              type="text"
+              type="email" 
               name="email"
               id="email"
               placeholder="Enter your email"
@@ -56,7 +62,7 @@ const Login = () => {
           {/* For password */}
           <div className="mb-4">
             <label
-              htmlFor="*******"
+              htmlFor="password" 
               className="block text-sm font-medium text-gray-700 mb-2"
             >
               Password
@@ -72,21 +78,22 @@ const Login = () => {
             />
           </div>
 
-          {/* For forgot password */}
+          {/* Forgot password link */}
           <a href="#" className="text-xs flex items-center text-black justify-end">
             Forgot Password?
           </a>
 
-          {/* Signup with account */}
+          {/* Signup link */}
           <div className="flex items-center justify-end mb-4">
-            <Link className="text-xs text-black " to="/signup">
-              Don't have account? <span className="underline">Signup here</span>
+            <Link className="text-xs text-black" to="/signup">
+              Don't have an account? <span className="underline">Signup here</span>
             </Link>
           </div>
 
+          {/* Submit button */}
           <button
             type="submit"
-            className="w-full py-2 px-4 rounded-md shadow-md text-sm font-medium text-white bg-black "
+            className="w-full py-2 px-4 rounded-md shadow-md text-sm font-medium text-white bg-black"
           >
             Login
           </button>

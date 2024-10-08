@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RiMenu3Fill } from "react-icons/ri";
+import { IoMenu } from "react-icons/io5";
 import { toggleSidebar } from "../../store/slices/navSlice";
 import { IoClose } from "react-icons/io5";
 
@@ -13,15 +13,13 @@ const DashboardHeader = () => {
 
   return (
     <>
-      <div className="my-5 mx-8">
-        <h1 className="text-3xl font-bold">
+      <div className="my-5 mx-8 text-[#012641]">
+        <h1 className="text-4xl font-bold ">
           Hello {author.charAt(0).toUpperCase() + author.slice(1)},
         </h1>
         <p>Welcome to your {role} dashboard</p>
       </div>
-
-      {/* Hamburget icon just for phone */}
-      <RiMenu3Fill
+      <IoMenu
         onClick={() => dispatch(toggleSidebar())}
         className={` ${
           sidebar === true ? "hidden" : "block sm:hidden"
@@ -36,5 +34,4 @@ const DashboardHeader = () => {
     </>
   );
 };
-
 export default DashboardHeader;

@@ -2,13 +2,15 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import heroSection from '../assets/mheroSections.jpg';
+
 const Signup = () => {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [accountType, setAccountType] = useState("");
+  const [accountType, setAccountType] = useState("buyer");
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -34,8 +36,13 @@ const Signup = () => {
   };
 
   return (
-    <div className="mt-20 sm:mt-10 min-h-screen flex items-center justify-center w-full ">
-      <div className="bg-white shadow-md rounded-3xl px-5 py-6 w-full sm:w-[35vw]">
+    <div className="mt-20 sm:mt-10 min-h-screen flex items-center justify-center w-full relative ">
+      <img
+        src={heroSection}
+        alt="Hero Section"
+        className="opacity-80 w-full h-full object-cover absolute top-0 left-0"
+      />
+      <div className="bg-white shadow-md rounded-3xl px-5 py-6 mx-2 w-full sm:w-[35vw] relative z-10">
         <h1 className="text-2xl font-bold text-center mb-4">Let's Connect!</h1>
         <form onSubmit={handleSignup}>
           {/* For username */}

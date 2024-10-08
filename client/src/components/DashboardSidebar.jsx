@@ -38,20 +38,20 @@ const DashboardSidebar = () => {
         !sidebar == true
           ? "-translate-x-[500px] sm:translate-x-0"
           : "translate-x-0"
-      } ease-in-out duration-300 flex sm:static text-lg font-semibold bg-white shadow-lg flex-col gap-2 w-fit min-h-screen p-3 list-none justify-between items-center`}
+      } ease-in-out duration-300 flex sm:static text-xl font-semibold bg-white shadow-lg flex-col gap-2 w-fit min-h-screen p-2 list-none justify-between items-center`}
     >
       <div>
         {/* Circle with my names first letter */}
-        <div className="bg-black my-5 w-fit rounded-full py-4 px-6 text-white">
+        <div className="bg-[#012641] my-5 w-fit rounded-full py-4 px-6 text-white">
           {author.charAt(0).toUpperCase()}
         </div>
 
         {/* list items */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 text-[#012641] ">
           {pathname === "/seller/profile" ? (
             <li
-              className={`w-full rounded-lg px-2 hover:bg-black hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center ${
-                tab === "photos-management" && "bg-black text-white"
+              className={`w-full rounded-lg px-2 hover:bg-[#012641] hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center ${
+                tab === "photos-management" && "bg-[#012641] text-white"
               }`}
               onClick={() => dispatch(setTab("photos-management"))}
             >
@@ -59,8 +59,8 @@ const DashboardSidebar = () => {
             </li>
           ) : (
             <li
-              className={`w-full rounded-lg px-2 hover:bg-black hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center ${
-                tab === "photos-purchased" && "bg-black text-white"
+              className={`w-full rounded-lg px-2 hover:bg-[#012641] hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center ${
+                tab === "photos-purchased" && "bg-[#012641] text-white"
               }`}
               onClick={() => dispatch(setTab("photos-purchased"))}
             >
@@ -69,8 +69,8 @@ const DashboardSidebar = () => {
           )}
 
           <li
-            className={`w-full rounded-lg px-2 hover:bg-black hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center ${
-              tab == "analytics" && "bg-black text-white"
+            className={`w-full rounded-lg px-2 hover:bg-[#012641] hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center ${
+              tab == "analytics" && "bg-[#012641] text-white"
             }`}
             onClick={() => dispatch(setTab("analytics"))}
           >
@@ -78,16 +78,16 @@ const DashboardSidebar = () => {
           </li>
 
           <li
-            className={`w-full rounded-lg px-2 hover:bg-black hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center ${
-              tab === "orders" && "bg-black text-white"
+            className={`w-full rounded-lg px-2 hover:bg-[#012641] hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center ${
+              tab === "orders" && "bg-[#012641] text-white"
             }`}
             onClick={() => dispatch(setTab("orders"))}
           >
             <FaList /> Orders
           </li>
           <li
-            className={`w-full rounded-lg px-2 hover:bg-black hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center ${
-              tab === "favourites" && "bg-black text-white"
+            className={`w-full rounded-lg px-2 hover:bg-[#012641] hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center ${
+              tab === "favourites" && "bg-[#012641] text-white"
             }`}
             onClick={() => dispatch(setTab("favourites"))}
           >
@@ -95,13 +95,13 @@ const DashboardSidebar = () => {
           </li>
           <Link
             to="/"
-            className="w-full rounded-lg px-2 hover:bg-black hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center"
+            className="w-full rounded-lg px-2 hover:bg-[#012641] hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center"
           >
             <AiFillHome /> Home
           </Link>
 
           <button
-            className="w-full px-2 hover:bg-black hover:text-white cursor-pointer transition-all ease-linear duration-300 gap-2 border-b-2 border-black text-center uppercase text-sm py-2"
+            className="w-full px-2 hover:bg-[#012641] hover:text-white cursor-pointer transition-all ease-linear duration-300 gap-2 border-b-2 border-black text-center uppercase text-sm py-2"
             onClick={switchProfile}
           >
             Switch to {pathname == "/seller/profile" ? "buyer" : "seller"}
@@ -111,7 +111,7 @@ const DashboardSidebar = () => {
 
       {/* logout button */}
       <li
-        className="w-full rounded-lg px-2 hover:bg-black hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center"
+        className="w-full rounded-lg px-2 hover:bg-[#012641] hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center"
         onClick={() => dispatch(logout())}
       >
         <IoLogOut /> Logout

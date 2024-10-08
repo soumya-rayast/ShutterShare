@@ -8,6 +8,8 @@ import gsap from "gsap";
 import { useEffect, useRef } from "react";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./ProtectedRoute";
+import Contact from "./Contact";
+import About from "./About";
 
 const GsapTransition = () => {
   const nodeRef = useRef(null);
@@ -31,6 +33,18 @@ const GsapTransition = () => {
           path="/signup"
           element={
             <ProtectedRoute children={<Signup />} requiresAuth={false} />
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <ProtectedRoute children={<Contact />} requiresAuth={false} />
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <ProtectedRoute children={<About />} requiresAuth={false} />
           }
         />
         <Route
